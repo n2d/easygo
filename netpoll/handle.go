@@ -89,7 +89,7 @@ func Handle(conn net.Conn, event Event) (*Desc, error) {
 	//
 	// See https://golang.org/pkg/net/#TCPConn.File
 	// See /usr/local/go/src/net/net.go: conn.File()
-	if err = syscall.SetNonblock(desc.fd(), true); err != nil {
+	if err = syscall.SetNonblock(syscall.Handle(desc.fd()), true); err != nil {
 		return nil, os.NewSyscallError("setnonblock", err)
 	}
 
